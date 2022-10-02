@@ -1,0 +1,59 @@
+create Database TenderManagementSystem
+
+  *Administrator table
+ Create table Administrator (userName varchar(10) unique,Password varchar(10));
++----------+----------+
+| userName | Password |
++----------+----------+
+| rupesh   | 123      |
+| King     | king     |
+| Admin    | admin    |
++----------+----------+
+
+ *Venders table
+Create table Venders (vid int primary key auto_increment, vname varchar(20) not null,vemail varchar(20) not null unique, password varchar(20) not null, company varchar(40) not null, address varchar(40) not null);
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| vid      | int         | NO   | PRI | NULL    | auto_increment |
+| vname    | varchar(20) | NO   |     | NULL    |                |
+| vemail   | varchar(20) | NO   | UNI | NULL    |                |
+| password | varchar(20) | NO   |     | NULL    |                |
+| company  | varchar(40) | NO   |     | NULL    |                |
+| address  | varchar(40) | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+ 
+ insert into venders(vname,vemail,password,company,address) values("rupesh","rupesh@gmail.com","1234","xyzCompany","abcAddress");
+
+
+
+
+
+* Tenders table
+
+Create table Tenders (tid int primary key auto_increment, tname varchar(20) not null, tdesc longtext);
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| tid   | int         | NO   | PRI | NULL    | auto_increment |
+| tname | varchar(20) | NO   |     | NULL    |                |
+| tdesc | longtext    | YES  |     | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+
+insert into tenders(tname,tdesc) values("Dam","built a dam");
+
+
+
+* Bids Table
+
+Create Table Bids ( bidid int primary key auto_increment, bvid int, btid int, bidamount double, foreign key (bvid) references venders(vid),foreign key (btid) references tenders(tid));
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| bidid     | int         | NO   | PRI | NULL    | auto_increment |
+| bvid      | int         | YES  | MUL | NULL    |                |
+| btid      | int         | YES  | MUL | NULL    |                |
+| bidamount | double      | YES  |     | NULL    |                |
+| status    | varchar(20) | YES  |     | Pending |                |
++-----------+-------------+------+-----+---------+----------------+
+
